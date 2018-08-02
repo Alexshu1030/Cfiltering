@@ -1,8 +1,8 @@
 // **********************************************************
-// Assignment0:
-// UTORID:
-// UT Student #:
-// Author:
+// Assignment3:
+// UTORID: tanuanje
+// UT Student #: 1003939982
+// Author: Jeremy Tanuanå
 //
 //
 // Honor Code: I pledge that this program represents my own
