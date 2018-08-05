@@ -4,18 +4,20 @@ public class Matrix<E> implements MatrixInterface<E>{
 
   protected E[][] content;
 
-  public void construct(int row, int col) {
-    // TODO Auto-generated method stub
-    
+  public Matrix() {
+	  this.content = (E[][]) new Object[0][0];
+  }
+
+  public Matrix(int row, int col) {
+    this.content = (E[][]) new Object[row][col];
   }
 
   public void populateMatrix(int row, int col, E input) {
     content[row][col] = input;
   }
 
-  public int get(int row, int col) {
-    // TODO Auto-generated method stub
-    return 0;
+  public E get(int row, int col) { 
+    return content[row][col];
   }
   
   @Override
