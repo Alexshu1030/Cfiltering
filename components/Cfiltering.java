@@ -15,20 +15,18 @@
 // *********************************************************
 package components;
 
-public class Cfiltering {
+import java.text.DecimalFormat;
+
+public class Cfiltering<E> {
   // this is a 2d matrix i.e. user*movie
-  private int userMovieMatrix[][];
+  private Matrix<E> userMovieMatrix;
   // this is a 2d matrix i.e. user*movie
-  private float userUserMatrix[][];
+  private Matrix<E> userUserMatrix;
 
   /**
    * Default Constructor.
    */
   public Cfiltering() {
-    // this is 2d matrix of size 1*1
-    userMovieMatrix = new int[1][1];
-    // this is 2d matrix of size 1*1
-    userUserMatrix = new float[1][1];
   }
 
   /*
@@ -45,7 +43,8 @@ public class Cfiltering {
    * @param numberOfMovies Determines size of matrix variables.
    */
   public Cfiltering(int numberOfUsers, int numberOfMovies) {
-
+	  userMovieMatrix = new Matrix<E>(numberOfUsers, numberOfMovies);
+	  userUserMatrix = new Matrix<E>(numberOfUsers, numberOfMovies);
   }
 
   /**
@@ -58,10 +57,9 @@ public class Cfiltering {
    * @param columnNumber The column number of the userMovieMatrix.
    * @param ratingValue The ratingValue to be inserted in the userMovieMatrix
    */
-  public void populateUserMovieMatrix(int rowNumber, int columnNumber,
-      int ratingValue) {
-
-    userMovieMatrix[rowNumber][columnNumber] = ratingValue;
+  public void populateUserMovieMatrix(int row, int col,
+      E input) {
+    userMovieMatrix.populateMatrix(row, col, input);
   }
 
   /*
@@ -83,7 +81,43 @@ public class Cfiltering {
    * @return COMPLETE THIS IF NEEDED
    */
   public void calculateSimilarityScore() {
-
+	// instantiate decimal accuracy of 4 decimal places
+	    DecimalFormat df = new DecimalFormat("0.0000");
+	    float similarityScore = 0;
+	    int i;
+	    int numOfUsers = userMovieMatrix.numOfRows;
+	    int numOfMovies = userMovieMatrix.numOfCols;
+	    // compares each user against one another to generate similarity
+	    // score
+	    for (i = 0; i < numOfUsers; i++) {
+	      for (int k = 1 + i; k < numOfUsers; k++) {
+	        // this is the total of all ratings given by 
+	        // (user1's rating of movie1-user2's rating of movie1)^2 + 
+	        // (user1's rating of movie2-user2's rating of movie2)^2 +
+	        // and so on...
+	        int summation = 0;
+	        // get rating of each movie of user1 and user2 and add
+	        // to summation
+	        for (int j = 0; j <= numOfMovies - 1; j++) {
+	          E rating1 = userMovieMatrix.get(i, j);
+	          E rating2 = userMovieMatrix.get(k, j);
+	          try {
+	        	  summation += (int) Math.pow((int)rating1 - (int)rating2, 2);
+	          } catch (InvalidRatingEntry e) {
+	        	  
+	          }
+	        }
+	        // perform formula for similarity score
+	        similarityScore = (float) (1 / (1 + Math.sqrt(summation)));
+	        // format score to hold 4 decimal places including trailing 0's
+	        E result = (E) df.format(similarityScore);
+	        // fill user-user matrix with score
+	        userUserMatrix.populateMatrix(i, k, result);
+	        userUserMatrix.populateMatrix(k, i, result);
+	      }
+	      // fill user-user matrix's main diagonal with 1.0000
+	      userUserMatrix.populateMatrix(i, i, (E) "1.0000");
+	    }
   }
 
   /*
