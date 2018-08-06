@@ -103,13 +103,20 @@ public class Cfiltering<E> {
           try {
             summation += (int) Math.pow((int) rating1 - (int) rating2, 2);
           } catch (NumberFormatException e) {
-            // TODO invalidRatingEntry
-          }
+            System.err.println("Invalid rating entry");
+            System.err.print(e.getMessage());
+          } 
         }
         // perform formula for similarity score
         similarityScore = (float) (1 / (1 + Math.sqrt(summation)));
         // format score to hold 4 decimal places including trailing 0's
-        E result = (E) df.format(similarityScore);
+        E result = null;
+        try {
+          result = (E) df.format(similarityScore);
+        } catch (NumberFormatException e) {
+          System.err.println("Invalid rating entry");
+          System.err.print(e.getMessage());
+        }
         // fill user-user matrix with score
         userUserMatrix.populateMatrix(i, k, result);
       }
@@ -195,7 +202,8 @@ public class Cfiltering<E> {
             j++;
           }
         } catch (NumberFormatException e) {
-          // TODO invalidRatingEntry
+          System.err.println("Invalid correlation entry");
+          System.err.print(e.getMessage());
         }
       }
     }
@@ -261,7 +269,8 @@ public class Cfiltering<E> {
             j++;
           }
         } catch (NumberFormatException e) {
-          // TODO invalidRatingEntry
+          System.err.println("Invalid correlation entry");
+          System.err.print(e.getMessage());
         }
       }
     }
