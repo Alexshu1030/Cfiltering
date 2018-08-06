@@ -1,6 +1,6 @@
 package components;
 
-public class UserUserMatrix<E> extends Matrix<E> implements MatrixInterface<E> {
+public class UserUserMatrix<E> extends Matrix<E> {
 
   @Override
   public void populateMatrix(int row, int col, E input) {
