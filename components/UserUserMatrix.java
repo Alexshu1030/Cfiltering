@@ -17,6 +17,16 @@ package components;
 
 public class UserUserMatrix<E> extends Matrix<E> {
 
+  public UserUserMatrix() {
+    this.content = (E[][]) new Object[0][0];
+  }
+
+  public UserUserMatrix(int row, int col) {
+    this.content = (E[][]) new Object[row][col];
+    this.numOfRows = row;
+    this.numOfCols = col;
+  }
+
   @Override
   public void populateMatrix(int row, int col, E input) {
     content[row][col] = input;
