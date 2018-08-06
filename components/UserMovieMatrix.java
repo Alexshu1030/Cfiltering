@@ -17,4 +17,14 @@ package components;
 
 public class UserMovieMatrix<E> extends Matrix<E> {
 
+  public UserMovieMatrix() {
+    this.content = (E[][]) new Object[0][0];
+  }
+
+  public UserMovieMatrix(int row, int col) {
+    this.content = (E[][]) new Object[row][col];
+    this.numOfRows = row;
+    this.numOfCols = col;
+  }
+
 }
