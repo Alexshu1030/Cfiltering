@@ -11,7 +11,7 @@
 // I have also read the plagiarism section in the course info
 // sheet of CSC B07 and understand the consequences. In this semester
 // we will select any three of your assignments from total of 5 and run it
-// for plagiarism check. 
+// for plagiarism check.
 // *********************************************************
 package driver;
 
@@ -19,14 +19,13 @@ import components.InputReader;
 
 public class CfilteringDriver {
 
-	/**
-	 * Reads user movie ratings from a text file, calculates similarity scores and
-	 * prints a score matrix.
-	 */
-	public static void main(String[] args) {
-		String output;
-		output = InputReader.read();
-		System.out.println(output);
-	}
-
+  /**
+   * Reads user movie ratings from a text file, calculates similarity scores and
+   * prints a score matrix.
+   */
+  public static void main(String[] args) {
+    String output;
+    output = InputReader.read();
+    System.out.println(output);
+  }
 }
