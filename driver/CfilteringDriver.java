@@ -24,7 +24,9 @@ public class CfilteringDriver {
 	 * prints a score matrix.
 	 */
 	public static void main(String[] args) {
-		InputReader.read();
+		String output;
+		output = InputReader.read();
+		System.out.println(output);
 	}
 
 }
