@@ -8,8 +8,10 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class InputReader {
-	public static void read() {
+	public static <E> String read() {
+		String output = "";
 		try {
+
 			// open file to read
 			String fileName;
 			Scanner in = new Scanner(System.in);
@@ -56,14 +58,8 @@ public class InputReader {
 			// close the file
 			fStream.close();
 
-			// CALCULATE THE SIMILARITY SCORE BETWEEN USERS.
-			cfObject.calculateSimilarityScore();
-			// PRINT OUT THE userUserMatrix
-			cfObject.printUserUserMatrix();
-			// PRINT OUT THE MOST SIMILAR PAIRS OF USER AND THE MOST
-			// DISSIMILAR PAIR OF USERS.
-			cfObject.findAndprintMostSimilarPairOfUsers();
-			cfObject.findAndprintMostDissimilarPairOfUsers();
+			output = cfObject.run();
+
 		} catch (FileNotFoundException e) {
 			System.err.println("Do you have the input file in the root"
 					+ " folder of your project?");
@@ -71,5 +67,6 @@ public class InputReader {
 		} catch (IOException e) {
 			System.err.print(e.getMessage());
 		}
+		return output;
 	}
 }
