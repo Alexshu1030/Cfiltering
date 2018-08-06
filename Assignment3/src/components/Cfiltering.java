@@ -62,6 +62,15 @@ public class Cfiltering<E> {
 		userMovieMatrix.populateMatrix(row, col, input);
 	}
 
+
+	public String run() {
+		String output = "";
+		this.calculateSimilarityScore();
+		output += this.getUserUserMatrix();
+		output += this.findMostSimilarPairOfUsers();
+		output += this.findMostDissimilarPairOfUsers();
+		return output;
+	}
 	/*
 	 * TODO:COMPLETE THIS YOU ARE FREE TO CHANGE THE FUNCTION SIGNATURE BUT DO NOT
 	 * CHANGE THE FUNCTION NAME AND DO NOT MAKE THIS FUNCTION STATIC. Add/remove
@@ -103,7 +112,7 @@ public class Cfiltering<E> {
 					E rating2 = userMovieMatrix.get(k, j);
 					try {
 						summation += (int) Math.pow((int)rating1 - (int)rating2, 2);
-					} catch (InvalidRatingEntry e) {
+					} catch (NumberFormatException e) {
 						//TODO invalidRatingEntry
 					}
 				}
@@ -134,22 +143,24 @@ public class Cfiltering<E> {
 	 * @return COMPLETE THIS IF NEEDED
 	 */
 
-	public void printUserUserMatrix() {
+	public String getUserUserMatrix() {
+		String output = "";
 		int numOfUsers = userUserMatrix.numOfRows;
 		// create two break lines to separate each section of output
-		System.out.println("\n");
-		System.out.println("userUserMatrix is: ");
+		output += "\n\n";
+		output += "userUserMatrix is: \n";
 		// print each user-user similarity score
 		for (int i = 0; i < numOfUsers; i++) {
-			System.out.print("[");
+			output += "[";
 			for (int j = 0; j < numOfUsers; j++) {
-				System.out.print(userUserMatrix.get(i, j));
+				output += userUserMatrix.get(i, j);
 				if (j < numOfUsers - 1) {
-					System.out.print(", ");
+					output += ", ";
 				}
 			}
-			System.out.println("]");
+			output += "]/n";
 		}
+		return output;
 	}
 
 	/*
@@ -165,12 +176,13 @@ public class Cfiltering<E> {
 	 * @return COMPLETE THIS IF NEEDED
 	 */
 
-	public void findAndprintMostSimilarPairOfUsers() {
+	public String findMostSimilarPairOfUsers() {
+		String output = "";
 		int numOfUsers = userUserMatrix.numOfRows;
 		// create two break lines to separate each section of output
-		System.out.println("\n");
-		System.out.println("The most similar pairs of users from above"
-				+ " userUserMatrix are: ");
+		output += "\n\n";
+		output += "The most similar pairs of users from above"
+				+ " userUserMatrix are: \n";
 		float highestScore = 0;
 		int j = 0;
 		// instantiate list of tuples holding the closest scored pairs
@@ -204,7 +216,7 @@ public class Cfiltering<E> {
 						highestScore = Float.parseFloat((String) userUserMatrix.get(i, k));
 						j++;
 					}
-				} catch (InvalidRatingEntry e) {
+				} catch (NumberFormatException e) {
 					//TODO invalidRatingEntry
 				}
 			}
@@ -212,14 +224,15 @@ public class Cfiltering<E> {
 		// print user pairs with most similar score
 		for (int l = 0; l <= j; l++) {
 			if (!(closestPair[l][0] == 0 && closestPair[l][1] == 0)) {
-				System.out.println("User" + (closestPair[l][0] + 1)
-						+ " and User" + (closestPair[l][1] + 1));
+				output += "User" + (closestPair[l][0] + 1)
+						+ " and User" + (closestPair[l][1] + 1) + "\n";
 			}
 		}
 		// change score to decimal accuracy of 4 places and print
 		DecimalFormat df = new DecimalFormat("0.0000");
 		String result = df.format(highestScore);
-		System.out.println("with similarity score of " + result);
+		output += "with similarity score of " + result + "\n";
+		return output;
 	}
 
 	/*
