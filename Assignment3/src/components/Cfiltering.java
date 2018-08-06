@@ -19,9 +19,9 @@ import java.text.DecimalFormat;
 
 public class Cfiltering<E> {
   // this is a 2d matrix i.e. user*movie
-  private Matrix<E> userMovieMatrix;
+  private UserMovieMatrix<E> userMovieMatrix;
   // this is a 2d matrix i.e. user*movie
-  private Matrix<E> userUserMatrix;
+  private UserUserMatrix<E> userUserMatrix;
 
   /**
    * Default Constructor.
@@ -42,8 +42,8 @@ public class Cfiltering<E> {
    * @param numberOfMovies Determines size of matrix variables.
    */
   public Cfiltering(int numberOfUsers, int numberOfMovies) {
-    userMovieMatrix = new Matrix<E>(numberOfUsers, numberOfMovies);
-    userUserMatrix = new Matrix<E>(numberOfUsers, numberOfMovies);
+    userMovieMatrix = new UserMovieMatrix<E>(numberOfUsers, numberOfMovies);
+    userUserMatrix = new UserUserMatrix<E>(numberOfUsers, numberOfMovies);
   }
 
   /**
@@ -121,7 +121,6 @@ public class Cfiltering<E> {
         E result = (E) df.format(similarityScore);
         // fill user-user matrix with score
         userUserMatrix.populateMatrix(i, k, result);
-        userUserMatrix.populateMatrix(k, i, result);
       }
       // fill user-user matrix's main diagonal with 1.0000
       userUserMatrix.populateMatrix(i, i, (E) "1.0000");
