@@ -28,10 +28,6 @@ public class Cfiltering<E> {
    */
   public Cfiltering() {}
 
-  /*
-   * TODO:COMPLETE THIS I.E. APPROPRIATELY CREATE THE userMovieMatrix AND
-   * userUserMatrix WITH CORRECT DIMENSIONS.
-   */
   /**
    * Constructs an object which contains two 2d matrices, one of size
    * users*movies which will store integer movie ratings and one of size
@@ -60,7 +56,14 @@ public class Cfiltering<E> {
     userMovieMatrix.populateMatrix(row, col, input);
   }
 
-
+  /**
+   * Returns the string representation of the UserUserMatrix then the most
+   * similar and dissimilar pair(s) of users.
+   * 
+   * @param rowNumber The row number of the userMovieMatrix.
+   * @param columnNumber The column number of the userMovieMatrix.
+   * @param ratingValue The ratingValue to be inserted in the userMovieMatrix
+   */
   public String run() {
     String output = "";
     this.calculateSimilarityScore();
@@ -70,23 +73,11 @@ public class Cfiltering<E> {
     return output;
   }
 
-  /*
-   * TODO:COMPLETE THIS YOU ARE FREE TO CHANGE THE FUNCTION SIGNATURE BUT DO NOT
-   * CHANGE THE FUNCTION NAME AND DO NOT MAKE THIS FUNCTION STATIC. Add/remove
-   * 
-   * @param AND
-   * 
-   * @return as required below.
-   */
   /**
    * Determines how similar each pair of users is based on their ratings. This
    * similarity value is represented with with a float value between 0 and 1,
    * where 1 is perfect/identical similarity. Stores these values in the
    * userUserMatrix.
-   * 
-   * @param COMPLETE THIS IF NEEDED
-   * @param COMPLETE THIS IF NEEDED
-   * @return COMPLETE THIS IF NEEDED
    */
   public void calculateSimilarityScore() {
     // instantiate decimal accuracy of 4 decimal places
@@ -127,20 +118,14 @@ public class Cfiltering<E> {
     }
   }
 
-  /*
-   * TODO:COMPLETE THIS YOU ARE FREE TO CHANGE THE FUNCTION SIGNATURE BUT DO NOT
-   * CHANGE THE FUNCTION NAME AND DO NOT MAKE THIS FUNCTION STATIC
-   */
   /**
-   * Prints out the similarity scores of the userUserMatrix, with each row and
-   * column representing each/single user and the cell position (i,j)
-   * representing the similarity score between user i and user j.
+   * Returns the string representation of similarity scores of the
+   * userUserMatrix, with each row and column representing each/single user and
+   * the cell position (i,j) representing the similarity score between user i
+   * and user j.
    * 
-   * @param COMPLETE THIS IF NEEDED
-   * @param COMPLETE THIS IF NEEDED
-   * @return COMPLETE THIS IF NEEDED
+   * @return output The string representation of the UserUserMatrix
    */
-
   public String getUserUserMatrix() {
     String output = "";
     int numOfUsers = userUserMatrix.numOfRows;
@@ -161,17 +146,12 @@ public class Cfiltering<E> {
     return output;
   }
 
-  /*
-   * TODO:COMPLETE THIS YOU ARE FREE TO CHANGE THE FUNCTION SIGNATURE BUT DO NOT
-   * CHANGE THE FUNCTION NAME AND DO NOT MAKE THIS FUNCTION STATIC
-   */
   /**
-   * This function finds and prints the most similar pair of users in the
-   * userUserMatrix.
+   * This function finds and returns the string representation of the most
+   * similar pair of users in the userUserMatrix.
    * 
-   * @param COMPLETE THIS IF NEEDED
-   * @param COMPLETE THIS IF NEEDED
-   * @return COMPLETE THIS IF NEEDED
+   * @return output The string representation of the most similar pair(s) of
+   *         users
    */
 
   public String getMostSimilarPairOfUsers() {
@@ -233,17 +213,12 @@ public class Cfiltering<E> {
     return output;
   }
 
-  /*
-   * TODO:COMPLETE THIS YOU ARE FREE TO CHANGE THE FUNCTION SIGNATURE BUT DO NOT
-   * CHANGE THE FUNCTION NAME AND DO NOT MAKE THIS FUNCTION STATIC
-   */
   /**
-   * This function finds and prints the most dissimilar pair of users in the
-   * userUserMatrix.
+   * This function finds and returns the string representation of the most
+   * dissimilar pair of users in the userUserMatrix.
    * 
-   * @param COMPLETE THIS IF NEEDED
-   * @param COMPLETE THIS IF NEEDED
-   * @return COMPLETE THIS IF NEEDED
+   * @return output The string representation of the most dissimilar pair(s) of
+   *         users
    */
   public String getMostDissimilarPairOfUsers() {
     String output = "";
