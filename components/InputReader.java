@@ -87,6 +87,13 @@ public class InputReader {
       System.err.print(e.getMessage());
     } catch (IOException e) {
       System.err.print(e.getMessage());
+    } catch (ArrayIndexOutOfBoundsException e) {
+      System.err.println("Number of users/movies incompatible"
+          + " with given UserMovieMatrix");
+      System.err.print(e.getMessage());
+    } catch (NullPointerException e) {
+      System.err.println("Number of rows/columns incompatible"
+          + " with given number of users/movies");
     }
     return output;
   }
