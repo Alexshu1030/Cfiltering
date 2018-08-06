@@ -70,7 +70,7 @@ public class InputReader {
       }
       // close the file
       fStream.close();
-
+      // run collaborative filtering on read input
       output = cfObject.run();
 
     } catch (FileNotFoundException e) {
