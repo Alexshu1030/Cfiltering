@@ -52,7 +52,7 @@ public class InputReader {
        * i.e.userMovieMatrix (#users*#movies) b) 2d matrix i.e. userUserMatrix
        * (#users*#users)
        */
-      Cfiltering cfObject = new Cfiltering(numberOfUsers, numberOfMovies);
+      CfilteringInterface cfObject = new Cfiltering(numberOfUsers, numberOfMovies);
 
       // this is a blank line being read
       br.readLine();
