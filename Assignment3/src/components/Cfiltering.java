@@ -215,7 +215,8 @@ public class Cfiltering<E> {
 	            // if new lowest score is found, erase previous entries to
 	            // farthestPair, add current pair to farthestPair, and
 	            // assert new lowest score
-	          } else if ((curScore < champScore && !similar) ||curScore > champScore && similar) {
+	          } else if ((curScore < champScore && !similar)
+	        		  || (curScore > champScore && similar)) {
 	            j = 0;
 	            // erase any previous entries to farthestPair
 	            for (int l = 0; l < numOfUsers * (numOfUsers - 1); l++) {
