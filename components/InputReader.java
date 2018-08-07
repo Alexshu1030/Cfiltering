@@ -94,6 +94,9 @@ public class InputReader {
     } catch (NullPointerException e) {
       System.err.println("Number of rows/columns incompatible"
           + " with given number of users/movies");
+    } catch (NumberFormatException e) {
+      System.err.println("Invalid matrix entry");
+      System.err.print(e.getMessage());
     }
     return output;
   }
