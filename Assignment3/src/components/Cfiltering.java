@@ -99,23 +99,13 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
         for (int j = 0; j <= numOfMovies - 1; j++) {
           E rating1 = userMovieMatrix.get(i, j);
           E rating2 = userMovieMatrix.get(k, j);
-          try {
-            summation += (int) Math.pow((int) rating1 - (int) rating2, 2);
-          } catch (NumberFormatException e) {
-            System.err.println("Invalid rating entry");
-            System.err.print(e.getMessage());
-          } 
+          summation += (int) Math.pow((int) rating1 - (int) rating2, 2);
         }
         // perform formula for similarity score
         similarityScore = (float) (1 / (1 + Math.sqrt(summation)));
         // format score to hold 4 decimal places including trailing 0's
-        E result = null;
-        try {
-          result = (E) df.format(similarityScore);
-        } catch (NumberFormatException e) {
-          System.err.println("Invalid rating entry");
-          System.err.print(e.getMessage());
-        }
+        E result = (E) df.format(similarityScore);
+
         // fill user-user matrix with score
         userUserMatrix.populateMatrix(i, k, result);
       }
@@ -161,7 +151,7 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    */
 
   private String getMostSimilarPairOfUsers() {
-	return getMostDisSimilarPairOfUsersHelper(true);
+    return getMostDisSimilarPairOfUsersHelper(true);
   }
 
   /**
@@ -185,68 +175,63 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    *         users
    */
   private String getMostDisSimilarPairOfUsersHelper(boolean similar) {
-	  String output = "";
-	    int numOfUsers = userUserMatrix.numOfRows;
-	    // create two break lines to separate each section of output
-	    output += "\n\n";
-	    output += "The most dissimilar pairs of users from above"
-	        + " userUserMatrix are: \n";
+    String output = "";
+    int numOfUsers = userUserMatrix.numOfRows;
+    // create two break lines to separate each section of output
+    output += "\n\n";
+    output += "The most dissimilar pairs of users from above"
+        + " userUserMatrix are: \n";
 
-	    float champScore = 0;
-	    if (!similar)
-	    	champScore = 1;
-	    
-	    int j = 0;
-	    // instantiate list of tuples holding the farthest scored pairs
-	    // [amount of farthest pairs][0: user1 in pair, 1: user2 in pair]
-	    int champPair[][] = new int[numOfUsers * (numOfUsers - 1)][2];
-	    // find user pairs with most dissimilar score
-	    for (int i = 0; i < numOfUsers; i++) {
-	      for (int k = 1 + i; k < numOfUsers; k++) {
-	        // add current pair to list of farthestPair if it has the same
-	        // score as the lowest known score
-	        try {
-	          float curScore =
-	        		  Float.parseFloat((String) userUserMatrix.get(i, k));
-	          if (curScore == champScore) {
-	        	  champPair[j][0] = i;
-	        	  champPair[j][1] = k;
-	            j++;
-	            // if new lowest score is found, erase previous entries to
-	            // farthestPair, add current pair to farthestPair, and
-	            // assert new lowest score
-	          } else if ((curScore < champScore && !similar)
-	        		  || (curScore > champScore && similar)) {
-	            j = 0;
-	            // erase any previous entries to farthestPair
-	            for (int l = 0; l < numOfUsers * (numOfUsers - 1); l++) {
-	            	champPair[l][0] = 0;
-	            	champPair[l][1] = 0;
-	            }
-	            // add current pair to list of farthestPair
-	            champPair[j][0] = i;
-	            champPair[j][1] = k;
-	            // assert new lowest score
-	            champScore = Float.parseFloat((String) userUserMatrix.get(i, k));
-	            j++;
-	          }
-	        } catch (NumberFormatException e) {
-	          System.err.println("Invalid correlation entry");
-	          System.err.print(e.getMessage());
-	        }
-	      }
-	    }
-	    // add to output user pairs with most dissimilar score
-	    for (int l = 0; l <= j; l++) {
-	      if (!(champPair[l][0] == 0 && champPair[l][1] == 0)) {
-	        output += "User" + (champPair[l][0] + 1) + " and User"
-	            + (champPair[l][1] + 1) + "\n";
-	      }
-	    }
-	    // change score to decimal accuracy of 4 places and add to output
-	    DecimalFormat df = new DecimalFormat("0.0000");
-	    String result = df.format(champScore);
-	    output += "with similarity score of " + result + "\n";
-	    return output;
+    float champScore = 0;
+    if (!similar)
+      champScore = 1;
+
+    int j = 0;
+    // instantiate list of tuples holding the farthest scored pairs
+    // [amount of farthest pairs][0: user1 in pair, 1: user2 in pair]
+    int champPair[][] = new int[numOfUsers * (numOfUsers - 1)][2];
+    // find user pairs with most dissimilar score
+    for (int i = 0; i < numOfUsers; i++) {
+      for (int k = 1 + i; k < numOfUsers; k++) {
+        // add current pair to list of farthestPair if it has the same
+        // score as the lowest known score
+        float curScore =
+            Float.parseFloat((String) userUserMatrix.get(i, k));
+        if (curScore == champScore) {
+          champPair[j][0] = i;
+          champPair[j][1] = k;
+          j++;
+          // if new lowest score is found, erase previous entries to
+          // farthestPair, add current pair to farthestPair, and
+          // assert new lowest score
+        } else if ((curScore < champScore && !similar)
+            || (curScore > champScore && similar)) {
+          j = 0;
+          // erase any previous entries to farthestPair
+          for (int l = 0; l < numOfUsers * (numOfUsers - 1); l++) {
+            champPair[l][0] = 0;
+            champPair[l][1] = 0;
+          }
+          // add current pair to list of farthestPair
+          champPair[j][0] = i;
+          champPair[j][1] = k;
+          // assert new lowest score
+          champScore = Float.parseFloat((String) userUserMatrix.get(i, k));
+          j++;
+        }
+      }
+    }
+    // add to output user pairs with most dissimilar score
+    for (int l = 0; l <= j; l++) {
+      if (!(champPair[l][0] == 0 && champPair[l][1] == 0)) {
+        output += "User" + (champPair[l][0] + 1) + " and User"
+            + (champPair[l][1] + 1) + "\n";
+      }
+    }
+    // change score to decimal accuracy of 4 places and add to output
+    DecimalFormat df = new DecimalFormat("0.0000");
+    String result = df.format(champScore);
+    output += "with similarity score of " + result + "\n";
+    return output;
   }
 }
