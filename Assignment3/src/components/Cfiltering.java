@@ -207,7 +207,8 @@ public class Cfiltering<E> {
 	        // add current pair to list of farthestPair if it has the same
 	        // score as the lowest known score
 	        try {
-	          float curScore = Float.parseFloat((String) userUserMatrix.get(i, k));
+	          float curScore =
+	        		  Float.parseFloat((String) userUserMatrix.get(i, k));
 	          if (curScore == champScore) {
 	        	  champPair[j][0] = i;
 	        	  champPair[j][1] = k;
