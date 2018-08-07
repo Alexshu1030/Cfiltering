@@ -17,7 +17,7 @@ package components;
 
 import java.text.DecimalFormat;
 
-public class Cfiltering<E> {
+public class Cfiltering<E> implements CfilteringInterface<E>{
   // this is a 2d matrix i.e. user*movie
   private UserMovieMatrix<E> userMovieMatrix;
   // this is a 2d matrix i.e. user*movie
@@ -79,7 +79,7 @@ public class Cfiltering<E> {
    * where 1 is perfect/identical similarity. Stores these values in the
    * userUserMatrix.
    */
-  public void calculateSimilarityScore() {
+  private void calculateSimilarityScore() {
     // instantiate decimal accuracy of 4 decimal places
     DecimalFormat df = new DecimalFormat("0.0000");
     float similarityScore = 0;
@@ -133,7 +133,7 @@ public class Cfiltering<E> {
    * 
    * @return output The string representation of the UserUserMatrix
    */
-  public String getUserUserMatrix() {
+  private String getUserUserMatrix() {
     String output = "";
     int numOfUsers = userUserMatrix.numOfRows;
     // create two break lines to separate each section of output
@@ -161,7 +161,7 @@ public class Cfiltering<E> {
    *         users
    */
 
-  public String getMostSimilarPairOfUsers() {
+  private String getMostSimilarPairOfUsers() {
 	return getMostDisSimilarPairOfUsersHelper(true);
   }
 
@@ -172,7 +172,7 @@ public class Cfiltering<E> {
    * @return output The string representation of the most dissimilar pair(s) of
    *         users
    */
-  public String getMostDissimilarPairOfUsers() {
+  private String getMostDissimilarPairOfUsers() {
     return getMostDisSimilarPairOfUsersHelper(false);
   }
 
@@ -185,7 +185,7 @@ public class Cfiltering<E> {
    * @return output The string representation of the most (dis)similar pair(s) of
    *         users
    */
-  public String getMostDisSimilarPairOfUsersHelper(boolean similar) {
+  private String getMostDisSimilarPairOfUsersHelper(boolean similar) {
 	  String output = "";
 	    int numOfUsers = userUserMatrix.numOfRows;
 	    // create two break lines to separate each section of output
