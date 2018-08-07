@@ -19,9 +19,9 @@ import java.text.DecimalFormat;
 
 public class Cfiltering<E> implements CfilteringInterface<E>{
   // this is a 2d matrix i.e. user*movie
-  private UserMovieMatrix<E> userMovieMatrix;
+  private MatrixInterface<E> userMovieMatrix;
   // this is a 2d matrix i.e. user*movie
-  private UserUserMatrix<E> userUserMatrix;
+  private MatrixInterface<E> userUserMatrix;
 
   /**
    * Default Constructor.
@@ -39,7 +39,20 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    */
   public Cfiltering(int numberOfUsers, int numberOfMovies) {
     userMovieMatrix = new UserMovieMatrix<E>(numberOfUsers, numberOfMovies);
-    userUserMatrix = new UserUserMatrix<E>(numberOfUsers, numberOfUsers);
+    userUserMatrix = new UserUserMatrix<E>(numberOfUsers);
+  }
+
+  /**
+   * Constructs an object which contains two 2d matrices, one of size
+   * users*movies which will store integer movie ratings and one of size
+   * users*users which will store float similarity scores between pairs of
+   * users.
+   * 
+   * @param UMMatrix This is the UserMovieMatrix itself
+   */
+  public Cfiltering(MatrixInterface<E> UMMatrix, MatrixInterface<E> UUMatrix) {
+    this.userMovieMatrix = UMMatrix;
+    this.userUserMatrix = UUMatrix;
   }
 
   /**
@@ -83,8 +96,8 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
     DecimalFormat df = new DecimalFormat("0.0000");
     float similarityScore = 0;
     int i;
-    int numOfUsers = userMovieMatrix.numOfRows;
-    int numOfMovies = userMovieMatrix.numOfCols;
+    int numOfUsers = userMovieMatrix.getNumRows();
+    int numOfMovies = userMovieMatrix.getNumCols();
     // compares each user against one another to generate similarity
     // score
     for (i = 0; i < numOfUsers; i++) {
@@ -124,7 +137,7 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    */
   private String getUserUserMatrix() {
     String output = "";
-    int numOfUsers = userUserMatrix.numOfRows;
+    int numOfUsers = userUserMatrix.getNumRows();
     // create two break lines to separate each section of output
     output += "\n\n";
     output += "userUserMatrix is: \n";
@@ -176,7 +189,7 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    */
   private String getMostDisSimilarPairOfUsersHelper(boolean similar) {
     String output = "";
-    int numOfUsers = userUserMatrix.numOfRows;
+    int numOfUsers = userUserMatrix.getNumRows();
     // create two break lines to separate each section of output
     output += "\n\n";
     output += "The most dissimilar pairs of users from above"
