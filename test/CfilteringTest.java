@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import components.Cfiltering;
-import components.Matrix;
 import mockObjects.*;
 
 public class CfilteringTest<E> {
