@@ -38,6 +38,14 @@ public class Matrix<E> implements MatrixInterface<E> {
   public E get(int row, int col) {
     return content[row][col];
   }
+  
+  public int getNumRows() {
+    return numOfRows;
+  }
+  
+  public int getNumCols() {
+    return numOfCols;
+  }
 
   @Override
   public String toString() {
