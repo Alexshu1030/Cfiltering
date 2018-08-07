@@ -60,9 +60,8 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    * Returns the string representation of the UserUserMatrix then the most
    * similar and dissimilar pair(s) of users.
    * 
-   * @param rowNumber The row number of the userMovieMatrix.
-   * @param columnNumber The column number of the userMovieMatrix.
-   * @param ratingValue The ratingValue to be inserted in the userMovieMatrix
+   * @return output The string representation of the userUserMatrix and most 
+   * dis/similar pairs of users
    */
   public String run() {
     String output = "";
