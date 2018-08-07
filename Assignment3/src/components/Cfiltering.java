@@ -39,7 +39,7 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    */
   public Cfiltering(int numberOfUsers, int numberOfMovies) {
     userMovieMatrix = new UserMovieMatrix<E>(numberOfUsers, numberOfMovies);
-    userUserMatrix = new UserUserMatrix<E>(numberOfUsers, numberOfMovies);
+    userUserMatrix = new UserUserMatrix<E>(numberOfUsers, numberOfUsers);
   }
 
   /**
