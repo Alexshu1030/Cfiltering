@@ -21,10 +21,10 @@ public class UserUserMatrix<E> extends Matrix<E> {
     this.content = (E[][]) new Object[0][0];
   }
 
-  public UserUserMatrix(int row, int col) {
-    this.content = (E[][]) new Object[row][col];
+  public UserUserMatrix(int row) {
+    this.content = (E[][]) new Object[row][row];
     this.numOfRows = row;
-    this.numOfCols = col;
+    this.numOfCols = row;
   }
 
   @Override
