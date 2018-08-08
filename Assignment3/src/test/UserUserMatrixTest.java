@@ -46,5 +46,21 @@ public class UserUserMatrixTest<E> {
     assertEquals(expected, actual);
   }
   
+  @Test (expected = ArrayIndexOutOfBoundsException.class)
+  public void IOOBConstructorTest() {
+    Matrix<E> matrix1 = new Matrix<E>(-3, -1);
+  }
+  
+  @Test (expected = ArrayIndexOutOfBoundsException.class)
+  public void IOOBPopulateTest() {
+    Matrix<E> matrix1 = new Matrix<E>(3, 3);
+    matrix1.populateMatrix(-2, -1, (E)"power");
+  }
+  
+  @Test (expected = ArrayIndexOutOfBoundsException.class)
+  public void IOOBGetTest() {
+    Matrix<E> matrix1 = new Matrix<E>(3, 3);
+    matrix1.get(7, 99);
+  }
 
 }
