@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import components.Cfiltering;
+import components.Matrix;
 import mockObjects.*;
 
 public class CfilteringTest<E> {
@@ -56,7 +57,7 @@ public class CfilteringTest<E> {
     String actual = cfObject.run();
     assertEquals(expected, actual);
   }
-  
+
   @Test
   public void populateTest() {
     String expected =  "\n" + 
@@ -112,8 +113,11 @@ public class CfilteringTest<E> {
     String actual = cfObject.run();
     assertEquals(expected, actual);
   }
-  /*
-   *
-   */
+
+  @Test (expected = ArrayIndexOutOfBoundsException.class)
+  public void IOOBPopulateTest() {
+    Cfiltering cfObject = new Cfiltering(UMmatrix, UUmatrix);
+    cfObject.populateUserMovieMatrix(-3, -11, 1);
+  }
 
 }
