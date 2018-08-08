@@ -28,7 +28,7 @@ public class Matrix<E> implements MatrixInterface<E> {
   }
 
   public Matrix(int row, int col) throws ArrayIndexOutOfBoundsException{
-    if (row > 0 && col >0) {
+    if (row > 0 && col > 0) {
       this.content = (E[][]) new Object[row][col];
       this.numOfRows = row;
       this.numOfCols = col;
