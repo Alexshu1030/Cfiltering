@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import components.Matrix;
-import components.UserMovieMatrix;
 
 public class MatrixTest<E> {
   
