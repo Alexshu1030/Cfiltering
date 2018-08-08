@@ -21,10 +21,12 @@ public class UserMovieMatrix<E> extends Matrix<E> {
     this.content = (E[][]) new Object[0][0];
   }
 
-  public UserMovieMatrix(int row, int col) {
-    this.content = (E[][]) new Object[row][col];
-    this.numOfRows = row;
-    this.numOfCols = col;
+  public UserMovieMatrix(int row, int col) throws ArrayIndexOutOfBoundsException{
+    if (row > 0 && col > 0) {
+      this.content = (E[][]) new Object[row][col];
+      this.numOfRows = row;
+      this.numOfCols = col;
+    } else throw new ArrayIndexOutOfBoundsException();
   }
 
 }
