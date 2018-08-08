@@ -37,9 +37,11 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    * @param numberOfUsers Determines size of matrix variables.
    * @param numberOfMovies Determines size of matrix variables.
    */
-  public Cfiltering(int numberOfUsers, int numberOfMovies) {
+  public Cfiltering(int numberOfUsers, int numberOfMovies) throws ArrayIndexOutOfBoundsException{
+    if (numberOfUsers > 0 && numberOfMovies > 0) {
     userMovieMatrix = new UserMovieMatrix<E>(numberOfUsers, numberOfMovies);
     userUserMatrix = new UserUserMatrix<E>(numberOfUsers);
+    } else throw new ArrayIndexOutOfBoundsException();
   }
 
   /**
@@ -65,8 +67,11 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    * @param columnNumber The column number of the userMovieMatrix.
    * @param ratingValue The ratingValue to be inserted in the userMovieMatrix
    */
-  public void populateUserMovieMatrix(int row, int col, E input) {
-    userMovieMatrix.populateMatrix(row, col, input);
+  public void populateUserMovieMatrix(int row, int col, E input) throws ArrayIndexOutOfBoundsException{
+    if (row >= 0 && col >= 0 && 
+        row < userMovieMatrix.getNumRows() && col < userMovieMatrix.getNumCols())
+      userMovieMatrix.populateMatrix(row, col, input);
+    else throw new ArrayIndexOutOfBoundsException();
   }
 
   /**
