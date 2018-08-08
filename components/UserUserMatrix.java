@@ -21,15 +21,20 @@ public class UserUserMatrix<E> extends Matrix<E> {
     this.content = (E[][]) new Object[0][0];
   }
 
-  public UserUserMatrix(int row) {
-    this.content = (E[][]) new Object[row][row];
-    this.numOfRows = row;
-    this.numOfCols = row;
+  public UserUserMatrix(int row) throws ArrayIndexOutOfBoundsException{
+    if (row > 0) {
+      this.content = (E[][]) new Object[row][row];
+      this.numOfRows = row;
+      this.numOfCols = row;
+    } else throw new ArrayIndexOutOfBoundsException();
   }
 
   @Override
-  public void populateMatrix(int row, int col, E input) {
-    content[row][col] = input;
-    content[col][row] = input;
+  public void populateMatrix(int row, int col, E input) throws ArrayIndexOutOfBoundsException{
+    if (row < this.numOfRows && col < this.numOfCols &&
+        row >= 0 && col >= 0) {
+      content[row][col] = input;
+      content[col][row] = input;
+    } else throw new ArrayIndexOutOfBoundsException();
   }
 }
