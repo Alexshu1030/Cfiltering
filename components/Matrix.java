@@ -25,24 +25,32 @@ public class Matrix<E> implements MatrixInterface<E> {
     this.content = (E[][]) new Object[0][0];
   }
 
-  public Matrix(int row, int col) {
-    this.content = (E[][]) new Object[row][col];
-    this.numOfRows = row;
-    this.numOfCols = col;
+  public Matrix(int row, int col) throws ArrayIndexOutOfBoundsException{
+    if (row > 0 && col >0) {
+      this.content = (E[][]) new Object[row][col];
+      this.numOfRows = row;
+      this.numOfCols = col;
+    } else throw new ArrayIndexOutOfBoundsException();
   }
 
-  public void populateMatrix(int row, int col, E input) {
-    content[row][col] = input;
+  public void populateMatrix(int row, int col, E input) throws ArrayIndexOutOfBoundsException{
+    if (row < numOfRows && col < numOfCols &&
+        row >= 0 && col >= 0)
+      content[row][col] = input;
+    else throw new ArrayIndexOutOfBoundsException();
   }
 
-  public E get(int row, int col) {
-    return content[row][col];
+  public E get(int row, int col) throws ArrayIndexOutOfBoundsException{
+    if (row < numOfRows && col < numOfCols &&
+        row >= 0 && col >= 0)
+      return content[row][col];
+    else throw new ArrayIndexOutOfBoundsException();
   }
-  
+
   public int getNumRows() {
     return numOfRows;
   }
-  
+
   public int getNumCols() {
     return numOfCols;
   }
