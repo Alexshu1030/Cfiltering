@@ -119,5 +119,10 @@ public class CfilteringTest<E> {
     Cfiltering cfObject = new Cfiltering(UMmatrix, UUmatrix);
     cfObject.populateUserMovieMatrix(-3, -11, 1);
   }
+  
+  @Test (expected = ArrayIndexOutOfBoundsException.class)
+  public void IOOBConstructorTest() {
+    Cfiltering cfObject = new Cfiltering(-3, -1);
+  }  
 
 }
