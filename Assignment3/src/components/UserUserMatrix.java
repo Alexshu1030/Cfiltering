@@ -15,6 +15,9 @@
 // *********************************************************
 package components;
 
+import java.util.Iterator;
+import java.util.Stack;
+
 public class UserUserMatrix<E> extends Matrix<E> {
 
   public UserUserMatrix() {
