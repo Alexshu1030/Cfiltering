@@ -5,6 +5,8 @@ import components.MatrixInterface;
 public class MockMatrix<E> implements MatrixInterface<E> {
 
   protected E content[][];
+  protected int numOfRows;
+  protected int numOfCols;
   
   public MockMatrix() {
   }
@@ -16,14 +18,14 @@ public class MockMatrix<E> implements MatrixInterface<E> {
   }
 
   @Override
-  public void populateMatrix(int row, int col, Object input) throws ArrayIndexOutOfBoundsException {
+  public void populateMatrix(int row, int col, E input) throws ArrayIndexOutOfBoundsException {
     if (row > 9 || row < 0 || col > 9 || col < 0)
       throw new ArrayIndexOutOfBoundsException();
   }
 
   public E get(int row, int col) throws ArrayIndexOutOfBoundsException {
     if (row >= 0 && row < 9 && col >= 0 && col < 9) {
-      return (E)(Object) 1;
+      return content[row][col];
     } else throw new ArrayIndexOutOfBoundsException();
   }
 
