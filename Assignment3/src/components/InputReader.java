@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-public class InputReader {
+public class InputReader{
 
   /**
    * Prompts input file then reads and returns collaborative filtering of the
