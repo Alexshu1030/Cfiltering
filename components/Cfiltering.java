@@ -39,8 +39,8 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    */
   public Cfiltering(int numberOfUsers, int numberOfMovies) throws ArrayIndexOutOfBoundsException{
     if (numberOfUsers > 0 && numberOfMovies > 0) {
-    userMovieMatrix = new UserMovieMatrix<E>(numberOfUsers, numberOfMovies);
-    userUserMatrix = new UserUserMatrix<E>(numberOfUsers);
+      userMovieMatrix = new UserMovieMatrix<E>(numberOfUsers, numberOfMovies);
+      userUserMatrix = new UserUserMatrix<E>(numberOfUsers);
     } else throw new ArrayIndexOutOfBoundsException();
   }
 
@@ -146,7 +146,27 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
     // create two break lines to separate each section of output
     output += "\n\n";
     output += "userUserMatrix is: \n";
+    /* Attempt to use iterator
+    int curRow = 0, curCol = 0;
+    int finalRow = userUserMatrix.getNumRows();
     // print each user-user similarity score
+    for (E item : userUserMatrix) {
+      if (!item.equals(null)) {
+        if (curCol == 0)
+          output += "[";
+
+        curCol ++;
+        output += item;
+        if (curCol == finalRow -1)
+          output += ", ";
+      } 
+      else {
+        output += "]\n";
+        curCol = 0;
+        curRow ++;
+      }
+    }
+*/
     for (int i = 0; i < numOfUsers; i++) {
       output += "[";
       for (int j = 0; j < numOfUsers; j++) {
@@ -157,6 +177,7 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
       }
       output += "]\n";
     }
+
     return output;
   }
 
