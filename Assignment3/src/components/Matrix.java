@@ -15,6 +15,9 @@
 // *********************************************************
 package components;
 
+import java.util.Iterator;
+import java.util.Stack;
+
 public class Matrix<E> implements MatrixInterface<E> {
 
   protected E[][] content;
@@ -60,6 +63,38 @@ public class Matrix<E> implements MatrixInterface<E> {
   @Override
   public String toString() {
     return "";
+  }
+
+  private static class MatrixIterator<E> implements Iterator<E> {
+    Stack<E> data;
+
+    public MatrixIterator(Matrix<E> matrix) {
+      data = new Stack<>();
+      for (int i = 0; i < matrix.getNumRows(); i++) {
+        for (int j = 0; j < matrix.getNumCols(); j++) {
+          data.push(matrix.get(i, j));
+        }
+      }
+    }
+
+    @Override
+    public boolean hasNext() {
+      return !(data.isEmpty());
+    }
+
+    @Override
+    public E next() {
+      if (hasNext()) {
+        E ret = data.pop();
+        return ret;
+      }
+      return null;
+    }
+  }
+
+  @Override
+  public Iterator<E> iterator() {
+    return new MatrixIterator<E>(this);
   }
 
 }
