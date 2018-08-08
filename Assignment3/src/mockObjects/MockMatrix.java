@@ -9,8 +9,10 @@ public class MockMatrix<E> implements MatrixInterface<E> {
   public MockMatrix() {
   }
 
-  public MockMatrix(int row, int col) {
-    content = (E[][]) new Object[row][col];
+  public MockMatrix(int row, int col) throws ArrayIndexOutOfBoundsException{
+    if (row > 0 && col > 0)
+      content = (E[][]) new Object[row][col];
+    else throw new ArrayIndexOutOfBoundsException();
   }
 
   @Override
