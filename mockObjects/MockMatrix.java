@@ -15,6 +15,7 @@
 // *********************************************************
 package mockObjects;
 
+import java.util.Iterator;
 import components.MatrixInterface;
 
 public class MockMatrix<E> implements MatrixInterface<E> {
@@ -52,6 +53,12 @@ public class MockMatrix<E> implements MatrixInterface<E> {
   @Override
   public int getNumCols() {
     return 5;
+  }
+
+  @Override
+  public Iterator<E> iterator() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }
