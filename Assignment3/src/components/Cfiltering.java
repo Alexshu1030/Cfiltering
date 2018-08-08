@@ -63,9 +63,9 @@ public class Cfiltering<E> implements CfilteringInterface<E>{
    * rating value is then inserted in the UserMovieMatrix at the specified
    * rowNumber and the columnNumber.
    * 
-   * @param rowNumber The row number of the userMovieMatrix.
-   * @param columnNumber The column number of the userMovieMatrix.
-   * @param ratingValue The ratingValue to be inserted in the userMovieMatrix
+   * @param row The row number of the userMovieMatrix.
+   * @param col The column number of the userMovieMatrix.
+   * @param input The ratingValue to be inserted in the userMovieMatrix
    */
   public void populateUserMovieMatrix(int row, int col, E input) throws ArrayIndexOutOfBoundsException{
     if (row >= 0 && col >= 0 && 
