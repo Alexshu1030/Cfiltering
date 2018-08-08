@@ -18,7 +18,7 @@ package components;
 import java.util.Iterator;
 import java.util.Stack;
 
-public class Matrix<E> implements MatrixInterface<E> {
+public class Matrix<E> implements MatrixInterface<E>, Iterable<E> {
 
   protected E[][] content;
   protected int numOfRows;
@@ -71,6 +71,7 @@ public class Matrix<E> implements MatrixInterface<E> {
     public MatrixIterator(Matrix<E> matrix) {
       data = new Stack<>();
       for (int i = 0; i < matrix.getNumRows(); i++) {
+        data.push(null);
         for (int j = 0; j < matrix.getNumCols(); j++) {
           data.push(matrix.get(i, j));
         }
