@@ -25,6 +25,14 @@ public class MockUserMovieMatrix<E> extends MockMatrix<E>{
     content[3][3] = (E)(Object) 5;
     content[3][4] = (E)(Object) 5;
   }
+  
+  @Override
+  public void populateMatrix(int row, int col, Object input) throws ArrayIndexOutOfBoundsException {
+    if (row > 9 || row < 0 || col > 9 || col < 0)
+      throw new ArrayIndexOutOfBoundsException();
+    else
+      content[row][col] = (E)input;
+  }
 
   @Override
   public E get(int row, int col) throws ArrayIndexOutOfBoundsException {
