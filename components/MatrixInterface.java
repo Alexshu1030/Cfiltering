@@ -17,7 +17,7 @@ package components;
 
 import java.util.Iterator;
 
-public interface MatrixInterface<E> {
+public interface MatrixInterface<E> extends Iterable<E>{
 
   public void populateMatrix(int row, int col, E input);
 
