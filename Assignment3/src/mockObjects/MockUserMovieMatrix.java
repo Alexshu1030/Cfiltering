@@ -11,7 +11,7 @@ public class MockUserMovieMatrix<E> extends MockMatrix<E>{
     content[0][4] = (E)(Object) 1;
     content[1][0] = (E)(Object) 5;
     content[1][1] = (E)(Object) 4;
-    content[1][2] = (E)(Object) 3;
+    content[1][2] = (E)(Object) 2;
     content[1][3] = (E)(Object) 5;
     content[1][4] = (E)(Object) 4;
     content[2][0] = (E)(Object) 4;
