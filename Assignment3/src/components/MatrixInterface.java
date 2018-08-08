@@ -15,6 +15,8 @@
 // *********************************************************
 package components;
 
+import java.util.Iterator;
+
 public interface MatrixInterface<E> {
 
   public void populateMatrix(int row, int col, E input);
@@ -26,5 +28,7 @@ public interface MatrixInterface<E> {
   public int getNumCols();
 
   public String toString();
+  
+  public Iterator<E> iterator();
 
 }
